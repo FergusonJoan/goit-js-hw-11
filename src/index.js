@@ -4,8 +4,7 @@ import { myAPI } from './js/myAPI';
 const refs = {
   form: document.querySelector('.search-form'),
   input: form.firstElementChild,
-  btnSearch: form.lastElementChild,
-  btnLoad: document.querySelector('.load-more'),
+  loadBtn: document.querySelector('.load-more'),
   gallery: document.querySelector('.gallery'),
 };
 const { form, input, btnSearch, btnLoad, gallery } = refs;
@@ -14,6 +13,9 @@ let pageNumber = 1;
 let perPage = 40;
 
 const myAPI = new myAPI();
+
+form.addEventListener('submit', handleSubmit);
+// loadBtn.addEventListener('click', loadMore);
 
 const handleSubmit = event => {
   event.preventDefault();
