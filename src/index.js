@@ -7,7 +7,8 @@ const refs = {
   loadBtn: document.querySelector('.load-more'),
   gallery: document.querySelector('.gallery'),
 };
-const { form, input, btnSearch, btnLoad, gallery } = refs;
+const { form, input, loadBtn, gallery } = refs;
+console.log(form);
 
 let pageNumber = 1;
 let perPage = 40;
