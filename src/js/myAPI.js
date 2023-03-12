@@ -2,14 +2,14 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://pixabay.com/api/';
 
-export class myAPI {
+export class MyAPI {
   API_KEY = '34339864-0ee58b65a9ac9bce25a8041d2';
   page;
   query;
 
   searchParams = new URLSearchParams({
     per_page: 40,
-    image_type: photo,
+    image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
     client_id: this.API_KEY,
