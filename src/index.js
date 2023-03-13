@@ -1,5 +1,5 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { MyAPI } from './js/MyAPI';
+import { myAPI } from './js/myAPI';
 // import cards from './js/renderImages';
 
 export const refs = {
@@ -9,7 +9,7 @@ export const refs = {
 };
 const { formEl, galleryEl } = refs;
 
-const myApi = new MyAPI();
+const myApi = new myAPI();
 formEl.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
