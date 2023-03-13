@@ -33,7 +33,7 @@ function fetchCards() {
 }
 
 function renderOnRequest() {
-  myApi.getImages().then(({ hits, totalHits }) => {
+  myApi.getImages().then((hits, totalHits) => {
     if (myApi.page === 1) {
       onCheckInput(totalHits);
     }

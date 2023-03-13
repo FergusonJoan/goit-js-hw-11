@@ -10,13 +10,13 @@ export class myAPI {
 
   async getImages() {
     const searchParams = new URLSearchParams({
-      per_page: 40,
-      page: this.page,
       key: API_KEY,
       q: this.searchQuery,
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
+      per_page: 40,
+      page: this.page,
     });
 
     try {
@@ -26,7 +26,7 @@ export class myAPI {
 
       return { hits, totalHits };
     } catch (error) {
-      console.error(error.response);
+      console.error(error);
     }
   }
 
