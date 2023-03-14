@@ -94,6 +94,7 @@ function cards(hits) {
           <p class="info-item">
             <b>Downloads: ${downloads}</b>
           </p>
+        </div>
         </div>`;
       }
     )

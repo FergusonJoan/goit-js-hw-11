@@ -2,22 +2,22 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 body {
   background-color: rgba(43, 51, 55, 0.292);
 }
+
 .wrapper {
-  /* height: 70px; */
+  align-items: center;
+  justify-content: center;
   padding: 0 20px;
   max-width: 100%;
   display: flex;
   padding: 1rem;
   z-index: 2;
-  justify-content: center;
-  align-items: center;
 }
 .search-form {
-  position: absolute;
 }
 input {
   margin-right: 20px;
@@ -28,22 +28,21 @@ input {
   padding: 20px 15px;
   font-size: 18px;
   display: inline-flex;
-  transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-  box-shadow: 0 2px 25px rgba(111, 198, 239, 0.497);
 }
 input:hover,
 input:focus {
   outline: none;
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-  box-shadow: 0 2px 25px rgba(111, 198, 239, 0.579);
+  box-shadow: 0 2px 45px rgba(111, 198, 239, 0.479);
 }
 .btn {
+  padding: 11px 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
   font-family: 'Helvetica', 'Arial', sans-serif;
   display: inline-block;
   font-size: 1em;
-  padding: 11px 25px;
-  margin-top: 100px;
-  margin-bottom: 60px;
   -webkit-appearance: none;
   appearance: none;
   background-color: rgba(111, 198, 239, 0.579);
@@ -57,13 +56,25 @@ input:focus {
 .btn:hover,
 .btn:focus {
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-  background-color: rgba(97, 172, 207, 0.579);
+  background-color: rgba(110, 185, 221, 0.862);
 }
 
 .gallery {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
+}
+.photo-card {
+  width: calc((100% - 120px) / 3);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.67);
 }
 .gallery__image {
+  /* display: block;
+  width: 100%;
+  object-fit: cover; */
+}
+.info {
+  margin: 10px;
 }
