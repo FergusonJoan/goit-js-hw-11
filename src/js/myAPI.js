@@ -9,20 +9,20 @@ export class myAPI {
   }
 
   async getImages() {
-    const searchParams = new URLSearchParams({
-      key: API_KEY,
-      q: this.searchQuery,
-      image_type: 'photo',
-      orientation: 'horizontal',
-      safesearch: true,
-      per_page: 40,
-      page: this.page,
-    });
-
     try {
       const {
         data: { hits, totalHits },
-      } = await axios.get(BASE_URL, { searchParams });
+      } = await axios.get(BASE_URL, {
+        params: {
+          key: API_KEY,
+          q: this.searchQuery,
+          image_type: 'photo',
+          orientation: 'horizontal',
+          safesearch: true,
+          per_page: 40,
+          page: this.page,
+        },
+      });
 
       return { hits, totalHits };
     } catch (error) {
