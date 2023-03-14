@@ -1,15 +1,14 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { myAPI } from './js/myAPI';
 import SimpleLightbox from 'simplelightbox';
-// Дополнительный импорт стилей
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 export const refs = {
   formEl: document.querySelector('.search-form'),
   galleryEl: document.querySelector('.gallery'),
-  // observedEl: document.querySelector(''),
+  observedEl: document.querySelector('.sentinel'),
 };
-const { formEl, galleryEl } = refs;
+const { formEl, galleryEl, observedEl } = refs;
 
 const myApi = new myAPI();
 formEl.addEventListener('submit', handleSubmit);
@@ -30,8 +29,7 @@ function handleSubmit(event) {
 }
 
 function fetchCards() {
-  //убирает наблюдение по этому элементу
-  obsorver.unobserve(entry.target);
+  infiniteScroll.unobserve(observedEl);
   renderOnRequest();
 }
 
@@ -44,13 +42,12 @@ function renderOnRequest() {
     }
     cards(hits);
     lightbox.refresh();
-    //observedEl - начинает наблюдение по этому элементу
-    observedEl.observe();
+
+    infiniteScroll.observe(observedEl);
     myApi.resetPage();
 
     if (myApi.page === Math.ceil(totalHits / 40)) {
-      //убирает наблюдение по этому элементу
-      obsorver.unobserve(entry.target);
+      infiniteScroll.unobserve(observedEl);
 
       lightbox.refresh();
       return Notify.info(
@@ -62,7 +59,7 @@ function renderOnRequest() {
 }
 
 function onCheckInput(totalHits) {
-  if (myApi.query === '') {
+  if (myApi.query === '' || totalHits <= 2) {
     return Notify.warning(
       'Sorry, there are no images matching your search query. Please try again.'
     );
@@ -109,12 +106,16 @@ let lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   scrollZoom: false,
 });
-
-let observedEl = new IntersectionObserver(([entry], observer) => {
-  entry => {
-    if (entry.isIntersecting) {
-      incrementPage();
+const options = { rootMargin: '250px' };
+const onEntry = entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && myApi.query !== '') {
+      if (myApi.page === 1) {
+        return;
+      }
+      renderOnRequest();
     }
-  },
-    { threshold: 0.8 };
-});
+  });
+};
+const infiniteScroll = new IntersectionObserver(onEntry, options);
+infiniteScroll.observe(observedEl);
